@@ -57,6 +57,7 @@ def hash_table_insert(hash_table, key, value):
 # If you try to remove a value that isn't there, print a warning.
 # '''
 def hash_table_remove(hash_table, key):
+    print(f"remove key: {key}")
     index = hash(key, len(hash_table.storage))
 
     current_pair = hash_table.storage[index]
