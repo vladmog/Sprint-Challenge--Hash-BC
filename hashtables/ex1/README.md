@@ -4,6 +4,7 @@ Given a package with a weight limit `limit` and a list `weights` of item weights
 ```
 (zero, one)
 ```
+<!-- Two packages? Do they mean two items of a package? -->
 where each element represents the item weights of the two packages. _**The higher valued index should be placed in the `zeroth` index and the smaller index should be placed in the `first` index.**_ If such a pair doesn’t exist for the given inputs, your function should return `None`.
 
 _NOTE:_ When calling `hash_table_retrieve` with a key that doesn't exist in the hash table, `hash_table_retrieve` will return `None`. 

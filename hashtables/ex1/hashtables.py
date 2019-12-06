@@ -90,6 +90,10 @@ def hash_table_retrieve(hash_table, key):
             return current_pair.value
         current_pair = current_pair.next
 
+    # Should return None if the key is not found.
+    if current_pair is None:
+        return None
+
 
 # '''
 # Fill this in
