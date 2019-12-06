@@ -49,11 +49,11 @@ def valid_proof(last_hash, proof):
     guess = f'{proof}'.encode()
     guess_hash = hashlib.sha256(guess).hexdigest()
 
-    print(f"Guess: {guess_hash}")
-    print(f"First 6 of guess: {guess_hash[:6]}")
-    print(f"Last hash: {last_hash}")
-    print(f"Last 6 of last: {str(last_hash)[-6:]}")
-    print(f"Comparison: {guess_hash[:6] == str(last_hash)[-6:]}\n\n")
+    # print(f"Guess: {guess_hash}")
+    # print(f"First 6 of guess: {guess_hash[:6]}")
+    # print(f"Last hash: {last_hash}")
+    # print(f"Last 6 of last: {str(last_hash)[-6:]}")
+    # print(f"Comparison: {guess_hash[:6] == str(last_hash)[-6:]}\n\n")
 
 
     return guess_hash[:6] == str(last_hash)[-6:]
