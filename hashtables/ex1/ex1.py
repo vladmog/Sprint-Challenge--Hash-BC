@@ -20,11 +20,12 @@ def get_indices_of_item_weights(weights, length, limit):
     for i, weight in enumerate(weights):
 
         complement = limit - weight
-        search_result = hash_table_retrieve(ht, complement)
-        if search_result:
+        search_index = hash_table_retrieve(ht, complement)
+
+        if search_index:
 
             indexA = i
-            indexB = search_result
+            indexB = search_index
 
             if indexA > indexB:
                 return (indexA, indexB)
