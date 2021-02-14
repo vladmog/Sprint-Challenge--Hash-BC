@@ -9,6 +9,33 @@ from hashtables import (HashTable,
 def get_indices_of_item_weights(weights, length, limit):
     ht = HashTable(16)
 
+
+
+
+    # Get weights into the hashtable
+    for i, weight in enumerate(weights):
+        hash_table_insert(ht, weight, i)
+
+    # Check if weight's complement is present in ht
+    for i, weight in enumerate(weights):
+
+        complement = limit - weight
+        search_index = hash_table_retrieve(ht, complement)
+
+        if search_index:
+
+            indexA = i
+            indexB = search_index
+
+            if indexA > indexB:
+                return (indexA, indexB)
+            else:
+                return (indexB, indexA)
+
+
+
+
+
     """
     YOUR CODE HERE
     """

@@ -24,6 +24,8 @@ class HashTable:
 # '''
 def hash(string, max):
     hash = 5381
+    if string is None:
+        string = "None"
     for char in string:
         hash = ((hash << 5) + hash) + ord(char)
 
@@ -36,21 +38,23 @@ def hash(string, max):
 # Hint: Used the LL handle collisions
 # '''
 def hash_table_insert(hash_table, key, value):
+
     index = hash(key, len(hash_table.storage))
+    print(f"Inserting key {key}, value {value} into index {index}")
 
     current_pair = hash_table.storage[index]
     last_pair = None
 
     while current_pair is not None and current_pair.key != key:
         last_pair = current_pair
-        current_pair = last_pair.next
+        current_pair = last_pair.next # Iterating through as long as occupied by diff key
 
     if current_pair is not None:
-        current_pair.value = value
+        current_pair.value = value # On match, overwrite value
     else:
-        new_pair = LinkedPair(key, value)
-        new_pair.next = hash_table.storage[index]
-        hash_table.storage[index] = new_pair
+        new_pair = LinkedPair(key, value) 
+        new_pair.next = hash_table.storage[index] # New pair's next = None
+        hash_table.storage[index] = new_pair # None is not New Pair
 
 
 # '''
@@ -83,14 +87,16 @@ def hash_table_remove(hash_table, key):
 # Should return None if the key is not found.
 # '''
 def hash_table_retrieve(hash_table, key):
+
     index = hash(key, len(hash_table.storage))
 
-    current_pair = hash_table.storage[index]
+    current_pair = hash_table.storage[index] # Bucket
 
-    while current_pair is not None:
+    while current_pair is not None: # While bucket not empty
         if(current_pair.key == key):
             return current_pair.value
         current_pair = current_pair.next
+    return None
 
 
 # '''

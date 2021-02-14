@@ -57,6 +57,7 @@ def hash_table_insert(hash_table, key, value):
 # If you try to remove a value that isn't there, print a warning.
 # '''
 def hash_table_remove(hash_table, key):
+    print(f"remove key: {key}")
     index = hash(key, len(hash_table.storage))
 
     current_pair = hash_table.storage[index]
@@ -89,6 +90,10 @@ def hash_table_retrieve(hash_table, key):
         if(current_pair.key == key):
             return current_pair.value
         current_pair = current_pair.next
+
+    # Should return None if the key is not found.
+    if current_pair is None:
+        return None
 
 
 # '''

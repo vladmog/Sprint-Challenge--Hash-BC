@@ -22,9 +22,15 @@ def proof_of_work(last_proof):
 
     start = timer()
 
-    print("Searching for next proof")
+    last_hash = hashlib.sha256(f'{last_proof}'.encode()).hexdigest()
+
     proof = 0
     #  TODO: Your code here
+
+    # Why was given code passing in `last_proof` while function parameter is `last_hash`?
+    # while valid_proof(last_proof, proof) is False:
+    while valid_proof(last_hash, proof) is False:
+        proof += 1
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
@@ -40,7 +46,17 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    guess = f'{proof}'.encode()
+    guess_hash = hashlib.sha256(guess).hexdigest()
+
+    # print(f"Guess: {guess_hash}")
+    # print(f"First 6 of guess: {guess_hash[:6]}")
+    # print(f"Last hash: {last_hash}")
+    # print(f"Last 6 of last: {str(last_hash)[-6:]}")
+    # print(f"Comparison: {guess_hash[:6] == str(last_hash)[-6:]}\n\n")
+
+
+    return guess_hash[:6] == str(last_hash)[-6:]
 
 
 if __name__ == '__main__':
@@ -65,7 +81,10 @@ if __name__ == '__main__':
     while True:
         # Get the last proof from the server
         r = requests.get(url=node + "/last_proof")
+        c = requests.get(url=node + "/full_chain")
         data = r.json()
+        chain = c.json()['chain']
+        print(f"Chain: {chain[len(chain)-1]}")
         new_proof = proof_of_work(data.get('proof'))
 
         post_data = {"proof": new_proof,
